@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yuma & Seta</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'EB Garamond', serif;
+      background-color: #ffe6e6;
+      color: #333;
+      position: relative;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #fff0f0;
+    }
+    header img {
+      max-width: 150px;
+      border-radius: 50%;
+    }
+    .panier-container {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      margin-right: 20px;
+      color: #990000;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .panier-container svg {
+      width: 22px;
+      height: 22px;
+      margin-right: 6px;
+      fill: #990000;
+    }
+    #panier {
+      display: none;
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      width: 300px;
+      background: #fff0f0;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 999;
+    }
+    h2 {
+      margin-top: 40px;
+      text-align: center;
+      color: #990000;
+    }
+    .section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+    .item {
+      background: none;
+      border-radius: 10px;
+      padding: 10px;
+      width: 200px;
+      box-shadow: none;
+      text-align: center;
+    }
+    .item img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #990000;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #cc0000;
+    }
+    .panier-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+    .supprimer {
+      background-color: transparent;
+      color: #990000;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .supprimer:hover {
+      color: #cc0000;
+    }
+    #formulaire {
+      display: none;
+      padding: 20px;
+      background: #fff;
+      margin: 20px auto;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div style="display: flex; align-items: center; gap: 10px;">
+    <img src="logo.jpg.jpg" alt="Logo Yuma & Seta" />
+     <h1 style="font-size: 24px; margin: 0; color: #990000;">Yuma & Seta</h1>
+    </div>
+    <div class="panier-container" onclick="togglePanier()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 
+                 0c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2zM7.16 
+                 14l.84-2h7.45c.75 0 1.41-.41 1.75-1.03L21 4H6.21l-.94-2H1v2h2l3.6 
+                 7.59-1.35 2.44C4.52 14.37 5.48 16 7 16h12v-2H7.16z"/>
+      </svg>
+      PANIER
+    </div>
+  </header>
+
+  <h2>Bracelets</h2>
+  <div class="section">
+    <div class="item"><img src="Bracelet Cartier.jpg"><p>Bracelet Cartier</p><button onclick="ajouterAuPanier('Bracelet Cartier', 2600)">Ajouter au panier - 2600 DA</button></div>
+    <div class="item"><img src="Bracelet Luis Vuitton.jpg.JPG"><p>Bracelet Louis Vuitton</p><button onclick="ajouterAuPanier('Bracelet Louis Vuitton', 2700)">Ajouter au panier - 2700 DA</button></div>
+    <div class="item"><img src="Bracelet Serpenti.jpg"><p>Bracelet Serpenti</p><button onclick="ajouterAuPanier('Bracelet Serpenti', 1200)">Ajouter au panier - 1200 DA</button></div>
+    <div class="item"><img src="Bracelet Ficcino.jpg"><p>Bracelet Ficcino</p><button onclick="ajouterAuPanier('Bracelet Ficcino', 1400)">Ajouter au panier - 1400 DA</button></div>
+    <div class="item"><img src="Bracelet Bambou.jpg"><p>Bracelet Bambou</p><button onclick="ajouterAuPanier('Bracelet Bambou', 1000)">Ajouter au panier - 1000 DA</button></div>
+    <div class="item"><img src="Bracelet Van Cleef dore.jpg"><p>Bracelet Van Cleef dore</p><button onclick="ajouterAuPanier('Bracelet Van Cleef dore', 1300)">Ajouter au panier - 1300 DA</button></div>
+    <div class="item"><img src="Bracelet Van Cleef noir et dore.jpg"><p>Bracelet Van Cleef noir et dore</p><button onclick="ajouterAuPanier('Bracelet Van Cleef noir et dore', 1300)">Ajouter au panier - 1300 DA</button></div>
+  </div>
+
+  <h2>Bagues</h2>
+  <div class="section">
+    <div class="item"><img src="Bague Bambou.jpg.JPG"><p>Bague Bambou</p><button onclick="ajouterAuPanier('Bague Bambou', 0)">Ajouter au panier</button></div>
+  </div>
+
+  <h2>Colliers</h2>
+  <div class="section">
+    <div class="item"><img src="Collier simple.jpg"><p>Collier simple</p><button onclick="ajouterAuPanier('Collier simple', 900)">Ajouter au panier - 900 DA</button></div>
+    <div class="item"><img src="Collier Blanc.jpg.JPG"><p>Collier Blanc</p><button onclick="ajouterAuPanier('Collier Blanc', 750)">Ajouter au panier - 750 DA</button></div>
+  </div>
+
+  <h2>Boucles d'oreilles</h2>
+  <div class="section">
+    <div class="item"><img src="Boucles Blanches.jpg.JPG"><p>Boucles Blanches</p><button onclick="ajouterAuPanier('Boucles Blanches', 250)">Ajouter au panier - 250 DA</button></div>
+    <div class="item"><img src="Boucles Jaunes.jpg"><p>Boucles Jaunes</p><button onclick="ajouterAuPanier('Boucles Jaunes', 250)">Ajouter au panier - 250 DA</button></div>
+    <div class="item"><img src="Boucles Dorees.jpg"><p>Boucles Dorees</p><button onclick="ajouterAuPanier('Boucles Dorees', 250)">Ajouter au panier - 250 DA</button></div>
+    <div class="item"><img src="Boucles Rondes simples.jpg"><p>Boucles Rondes simples</p><button onclick="ajouterAuPanier('Boucles Rondes simples', 250)">Ajouter au panier - 250 DA</button></div>
+    <div class="item"><img src="Boucles Rondes decorees.jpg"><p>Boucles Rondes decorres</p><button onclick="ajouterAuPanier('Boucles Rondes decor�es', 250)">Ajouter au panier - 250 DA</button></div>
+  </div>
+
+  <h2>Promotions</h2>
+  <div class="section">
+    <div class="item"><img src="Pack Bague et Bracelet Bambou.jpg"><p>Pack Bague et Bracelet Bambou</p><button onclick="ajouterAuPanier('Pack Bague et Bracelet Bambou', 2000)">Ajouter au panier - 2000 DA</button></div>
+    <div class="item"><img src="Pack Bracelet Serpenti et Collier simple.jpg"><p>Pack Bracelet Serpenti et Collier simple</p><button onclick="ajouterAuPanier('Pack Bracelet Serpenti et Collier simple', 2000)">Ajouter au panier - 2000 DA</button></div>
+    <div class="item"><img src="Pack Bracelet Ficcino et 3 Boucles d'oreilles.jpg"><p>Pack Bracelet Ficcino et 3 Boucles d'oreilles</p><button onclick="ajouterAuPanier('Pack Bracelet Ficcino et 3 Boucles d\'oreilles', 2000)">Ajouter au panier - 2000 DA</button></div>
+    <div class="item"><img src="Pack Bracelet Van Cleef dore et 3 Boucles d'oreilles.jpg"><p>Pack Bracelet Van Cleef dore et 3 Boucles d'oreilles</p><button onclick="ajouterAuPanier('Pack Bracelet Van Cleef dore et 3 Boucles d\'oreilles', 2000)">Ajouter au panier - 2000 DA</button></div>
+    <div class="item"><img src="Bracelet Vancleef noir et doré et 3 Boucles.jpg.JPG"><p>Pack Bracelet Van Cleef noir et dore et 3 Boucles d'oreilles</p><button onclick="ajouterAuPanier('Pack Bracelet Van Cleef noir et dore et 3 Boucles d\'oreilles', 2000)">Ajouter au panier - 2000 DA</button></div>
+  </div>
+
+  <div id="panier">
+    <h3>Panier</h3>
+    <ul id="liste-panier"></ul>
+    <p>Total : <span id="total">0</span> DA</p>
+    <label>Points a utiliser :
+      <input type="number" id="points" value="0" oninput="mettreAJourTotal()" />
+    </label>
+    <p>Reduction : <span id="reduction">0</span> DA</p>
+    <p>Total a payer : <span id="total-final">0</span> DA</p>
+    <button onclick="afficherFormulaire()">Confirmer</button>
+  </div>
+  <div id="formulaire">
+    <h3>Finaliser la commande</h3>
+    <input type="text" id="nom" placeholder="Nom" required />
+    <input type="text" id="prenom" placeholder="Prenom" required />
+    <input type="texte" id="instagram" placeholder="Instagram" required />
+    <input type="date" id="naissance" placeholder="Date de naissance" required />
+    <input type="tel" id="tel" placeholder="Numero de telephone" required />
+    <select id="livraison" onchange="gererLivraison()" required>
+      <option value="">-- Choisir un mode de livraison --</option>
+      <option value="bureau">Bureau</option>
+      <option value="domicile">A domicile</option>
+    </select>
+    <input type="text" id="wilaya" placeholder="Wilaya" required />
+    <input type="text" id="adresse" placeholder="Adresse exacte" style="display: none;" />
+    <button onclick="validerCommande()">Commander</button>
+  </div>
+<script>
+  let panier = [];
+
+  function ajouterAuPanier(nom, prix) {
+    panier.push({ nom, prix });
+    mettreAJourPanier();
+  }
+
+  function supprimerDuPanier(index) {
+    panier.splice(index, 1);
+    mettreAJourPanier();
+  }
+
+  function mettreAJourPanier() {
+    const liste = document.getElementById("liste-panier");
+    liste.innerHTML = "";
+    let total = 0;
+    panier.forEach((item, index) => {
+      const li = document.createElement("li");
+      li.className = "panier-item";
+      li.innerHTML = `${item.nom} - ${item.prix} DA <button class="supprimer" onclick="supprimerDuPanier(${index})">x</button>`;
+      liste.appendChild(li);
+      total += item.prix;
+    });
+    document.getElementById("total").textContent = total;
+    mettreAJourTotal();
+  }
+
+  function mettreAJourTotal() {
+    let points = parseInt(document.getElementById("points").value) || 0;
+    let reduction = Math.round(points * 3.33);
+    let total = parseInt(document.getElementById("total").textContent);
+    let final = Math.max(total - reduction, 0);
+    document.getElementById("reduction").textContent = reduction;
+    document.getElementById("total-final").textContent = final;
+  }
+
+  function afficherFormulaire() {
+    const formulaire = document.getElementById("formulaire");
+    if (formulaire) {
+      formulaire.style.display = "block";
+      formulaire.scrollIntoView({ behavior: "smooth" });
+    } else {
+      alert("Erreur : le formulaire est introuvable !");
+    }
+  }
+
+  function gererLivraison() {
+    const livraison = document.getElementById("livraison").value;
+    const adresse = document.getElementById("adresse");
+    if (livraison === "domicile") {
+      adresse.style.display = "block";
+      adresse.required = true;
+    } else {
+      adresse.style.display = "none";
+      adresse.required = false;
+    }
+  }
+
+  function validerCommande() {
+    const nom = document.getElementById("nom").value.trim();
+    const prenom = document.getElementById("prenom").value.trim();
+    const instagram = document.getElementById("instagram").value.trim();
+    const tel = document.getElementById("tel").value.trim();
+    const wilaya = document.getElementById("wilaya").value.trim();
+    const naissance = document.getElementById("naissance").value;
+    const livraison = document.getElementById("livraison").value;
+    const adresse = document.getElementById("adresse").value.trim();
+
+    if (!nom || !prenom  || !instagram || !tel || !wilaya || !naissance || !livraison || (livraison === "domicile" && !adresse)) {
+      alert("Veuillez remplir tous les champs obligatoires.");
+      return;
+    }
+
+    
+    const data = {
+      nom: nom,
+      prenom: prenom,
+      instagram: instagram,
+      naissance: naissance,
+      tel: tel,
+      wilaya: wilaya,
+      livraison: livraison,
+      adresse: livraison === "domicile" ? adresse : ""
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbwniZo3xOhC6QOaaX5d92IuecAEXEQDgRiAINkiVrvJ22VJdORmvU3UJ6X_z0utOavIDA/exec", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(res => res.text())
+      .then(response => {
+          console.log("Réponse Google Sheets:", response);
+      })
+      .catch(error => {
+          console.error("Erreur lors de l'envoi vers Google Sheets:", error);
+      });
+
+
+    document.body.innerHTML = "<h2 style='text-align:center; padding:50px;'>Merci pour votre commande, nous vous contacterons bientot.</h2>";
+  }
+
+  function togglePanier() {
+    const panierDiv = document.getElementById("panier");
+    panierDiv.style.display = panierDiv.style.display === "block" ? "none" : "block";
+  }
+</script>
+
+
+
+</body>
+</html>
